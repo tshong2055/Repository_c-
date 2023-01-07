@@ -710,11 +710,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\hts20\\Source\\Repos\\Repository_c-\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
       "projectName": "TwincatAds.ClassLibrary",
-      "projectPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
+      "projectPath": "C:\\Users\\hts20\\Source\\Repos\\Repository_c-\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
       "packagesPath": "C:\\Users\\hts20\\.nuget\\packages\\",
-      "outputPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\obj\\",
+      "outputPath": "C:\\Users\\hts20\\Source\\Repos\\Repository_c-\\Twincat.ads.ClassLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hts20\\AppData\\Roaming\\NuGet\\NuGet.Config",

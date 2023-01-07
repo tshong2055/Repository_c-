@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xTrHu3MdNLxmkWGWY95JDsbAZRHu/gps4v4Ka0nBvv+APlqte9jPIhfbuOghks0GG5Msjo0Tg7QS1i+jtZRKgA==",
+  "dgSpecHash": "XgQPNmIZZwSEqy+1YV7jLdKZrPY2hibh8gyAbHS2KukjT/KuQAOnxChCsW2HvAFh9jBE7WEhVpGW/J+oD8ezFA==",
   "success": true,
-  "projectFilePath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
+  "projectFilePath": "C:\\Users\\hts20\\Source\\Repos\\Repository_c-\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hts20\\.nuget\\packages\\beckhoff.twincat.ads\\6.0.216\\beckhoff.twincat.ads.6.0.216.nupkg.sha512",
     "C:\\Users\\hts20\\.nuget\\packages\\beckhoff.twincat.ads.abstractions\\6.0.216\\beckhoff.twincat.ads.abstractions.6.0.216.nupkg.sha512",
