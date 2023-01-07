@@ -1,0 +1,12 @@
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.csproj.AssemblyReference.cache
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.AssemblyInfoInputs.cache
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.AssemblyInfo.cs
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.csproj.CoreCompileInputs.cache
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\bin\Debug\net6.0\TwincatAds.ClassLibrary.deps.json
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\bin\Debug\net6.0\TwincatAds.ClassLibrary.dll
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\bin\Debug\net6.0\TwincatAds.ClassLibrary.pdb
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.dll
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\refint\TwincatAds.ClassLibrary.dll
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\TwincatAds.ClassLibrary.pdb
+D:\WORK_C#\IPCS_Algorithm\IPCS\Twincat.ads.ClassLibrary\obj\Debug\net6.0\ref\TwincatAds.ClassLibrary.dll

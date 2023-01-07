@@ -1,0 +1,137 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\ADS_TEST_WINFORMS\\ADS_TEST_WINFORMS.csproj": {}
+  },
+  "projects": {
+    "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\ADS_TEST_WINFORMS\\ADS_TEST_WINFORMS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\ADS_TEST_WINFORMS\\ADS_TEST_WINFORMS.csproj",
+        "projectName": "ADS_TEST_WINFORMS",
+        "projectPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\ADS_TEST_WINFORMS\\ADS_TEST_WINFORMS.csproj",
+        "packagesPath": "C:\\Users\\hts20\\.nuget\\packages\\",
+        "outputPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\ADS_TEST_WINFORMS\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\hts20\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {
+              "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj": {
+                "projectPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "ScottPlot.WinForms": {
+              "target": "Package",
+              "version": "[4.1.59, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
+        "projectName": "TwincatAds.ClassLibrary",
+        "projectPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\TwincatAds.ClassLibrary.csproj",
+        "packagesPath": "C:\\Users\\hts20\\.nuget\\packages\\",
+        "outputPath": "D:\\WORK_C#\\IPCS_Algorithm\\IPCS\\Twincat.ads.ClassLibrary\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\hts20\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Beckhoff.TwinCAT.Ads": {
+              "target": "Package",
+              "version": "[6.0.216, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

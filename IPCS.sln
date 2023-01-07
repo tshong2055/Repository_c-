@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwincatAds.ClassLibrary", "Twincat.ads.ClassLibrary\TwincatAds.ClassLibrary.csproj", "{430C6F6E-7E59-44B8-AB59-0CEA59F0269C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph_WinFormsApp_3", "Graph_WinFormsApp_3\Graph_WinFormsApp_3.csproj", "{4E841B6D-99C6-4AD1-A5D4-49822666A928}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{430C6F6E-7E59-44B8-AB59-0CEA59F0269C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{430C6F6E-7E59-44B8-AB59-0CEA59F0269C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{430C6F6E-7E59-44B8-AB59-0CEA59F0269C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{430C6F6E-7E59-44B8-AB59-0CEA59F0269C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E841B6D-99C6-4AD1-A5D4-49822666A928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E841B6D-99C6-4AD1-A5D4-49822666A928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E841B6D-99C6-4AD1-A5D4-49822666A928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E841B6D-99C6-4AD1-A5D4-49822666A928}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ECCD6D97-71D2-41B8-B64C-596C2FB768D2}
+	EndGlobalSection
+EndGlobal
