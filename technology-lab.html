@@ -1,0 +1,1803 @@
+<title>Technology Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#101214;
+    --bg-raised:#15181b;
+    --surface:#1b1f23;
+    --surface-2:#232830;
+    --border:#2b3138;
+    --border-strong:#3a424a;
+    --text:#ece9e2;
+    --text-muted:#9ba3ab;
+    --text-faint:#69727a;
+    --accent:#e2812c;
+    --accent-strong:#f4993f;
+    --accent-soft:rgba(226,129,44,0.14);
+    --accent-ink:#181205;
+    --blue:#5c93a6;
+    --blue-soft:rgba(92,147,166,0.14);
+    --danger:#c9534f;
+    --grid-line:rgba(92,147,166,0.07);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 88px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 88px),
+      var(--bg);
+    color:var(--text);
+    font-family:"IBM Plex Sans", -apple-system, "Malgun Gothic", sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:"Big Shoulders Display","Malgun Gothic",sans-serif;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    text-wrap:balance;
+    margin:0;
+    color:var(--text);
+  }
+
+  .mono{ font-family:"IBM Plex Mono", ui-monospace, monospace; }
+
+  a{ color:inherit; }
+  button{ font-family:inherit; }
+  :focus-visible{ outline:2px solid var(--accent-strong); outline-offset:3px; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(16,18,20,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .brand{
+    display:flex; align-items:baseline; gap:10px;
+    font-family:"Big Shoulders Display",sans-serif;
+    font-weight:800; font-size:22px; letter-spacing:0.02em;
+    text-decoration:none;
+  }
+  .brand .dot{ color:var(--accent); }
+  .brand small{
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:500; font-size:10.5px; letter-spacing:0.14em;
+    color:var(--text-faint); text-transform:uppercase;
+  }
+  .navlinks{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .navlinks a{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
+    text-decoration:none; color:var(--text-muted);
+    padding:6px 2px; border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .navlinks a:hover{ color:var(--text); border-color:var(--accent); }
+  .navtoggle{ display:none; }
+
+  @media (max-width:720px){
+    .navlinks{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 96px;
+    border-bottom:1px solid var(--border);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero .wrap{ grid-template-columns:1fr; }
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--blue);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:""; width:22px; height:1px; background:var(--blue);
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.04;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero p.lead{
+    font-size:17px; color:var(--text-muted);
+    max-width:52ch; margin-bottom:32px;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+    padding:14px 22px;
+    border-radius:2px;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid var(--border-strong);
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{
+    background:var(--accent); color:var(--accent-ink); border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover{ background:var(--accent-strong); border-color:var(--accent-strong); }
+  .btn-ghost{ background:transparent; color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--text-muted); }
+
+  .hero-panel{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:3px;
+    padding:20px;
+  }
+  .hero-panel .panel-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:"IBM Plex Mono",monospace; font-size:11px;
+    letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:14px;
+  }
+  .hero-panel .panel-head .live{ color:var(--accent); }
+  .hero-panel canvas{ width:100%; display:block; }
+
+  /* ---------- Sections ---------- */
+  .section{
+    padding:84px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .section-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:36px;
+  }
+  .section-num{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px; color:var(--blue);
+    letter-spacing:0.06em;
+  }
+  .section h2{ font-size:clamp(26px,3.2vw,36px); }
+
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px;
+  }
+  @media (max-width:780px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-grid p{ color:var(--text-muted); font-size:16px; max-width:58ch; }
+  .tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .tag{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px; letter-spacing:0.04em;
+    padding:8px 12px;
+    border:1px solid var(--border-strong);
+    border-radius:2px;
+    color:var(--text-muted);
+  }
+  .specsheet{
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:3px;
+    padding:22px 24px;
+  }
+  .specsheet dl{ margin:0; }
+  .specsheet .row{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+    font-family:"IBM Plex Mono",monospace; font-size:13px;
+  }
+  .specsheet .row:last-child{ border-bottom:none; }
+  .specsheet dt{ color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; }
+  .specsheet dd{ margin:0; color:var(--text); text-align:right; }
+
+  .press-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+  }
+  @media (max-width:780px){ .press-grid{ grid-template-columns:1fr; } }
+  .press-card{
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .press-card .diagram{
+    background:var(--bg-raised);
+    border-bottom:1px solid var(--border);
+    padding:18px;
+  }
+  .press-card .diagram svg{ width:100%; height:auto; display:block; }
+  .press-card .body{ padding:22px 24px 26px; }
+  .press-card .kicker{
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--blue);
+    margin-bottom:8px; display:block;
+  }
+  .press-card h3{ font-size:24px; margin-bottom:12px; }
+  .press-card p{ color:var(--text-muted); font-size:14.5px; margin-bottom:16px; }
+  .press-card ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+  .press-card li{
+    font-size:13.5px; color:var(--text-muted);
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .press-card li::before{
+    content:""; width:6px; height:6px; margin-top:6px; flex:none;
+    background:var(--accent);
+  }
+
+  /* ---------- Product shape ---------- */
+  .up-section{ margin-top:36px; padding-top:28px; border-top:1px solid var(--border); }
+  .up-section h3{ font-size:20px; margin-bottom:10px; }
+  .up-rows{ display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; }
+  .ram-params{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:14px 16px; }
+  .eject-punch-checks{ display:flex; flex-wrap:wrap; gap:8px; margin-top:2px; }
+  .eject-check{
+    display:flex; align-items:center; gap:7px;
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+    letter-spacing:0.04em; color:var(--text-muted);
+    padding:8px 12px; border:1px solid var(--border-strong); border-radius:2px;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .eject-check input{ accent-color:var(--accent); margin:0; }
+  .eject-check.is-on{ border-color:var(--accent); color:var(--accent-strong); background:var(--accent-soft); }
+  .field.mini select{
+    width:100%;
+    background:var(--bg-raised);
+    border:1px solid var(--border-strong);
+    color:var(--text);
+    font-family:"IBM Plex Mono",monospace; font-size:13px;
+    padding:8px 8px; border-radius:2px;
+  }
+  .up-computed{
+    margin-top:10px;
+    font-family:"IBM Plex Mono",monospace; font-size:12.5px;
+    color:var(--text-faint);
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .up-computed .v{ color:var(--accent); font-variant-numeric:tabular-nums; }
+  .shape-rows{ display:grid; gap:12px; margin-top:4px; }
+  .shape-row{
+    border:1px solid var(--border);
+    background:var(--bg-raised);
+    border-radius:2px;
+    padding:12px 14px;
+  }
+  .shape-row-top{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .shape-row-label{ font-size:12px; color:var(--blue); letter-spacing:0.05em; }
+  .shape-row-fields{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .fill-inherited{ font-size:10.5px; color:var(--text-faint); letter-spacing:0.02em; }
+  .field.mini{ margin-bottom:0; }
+  .field.mini label{ font-size:10.5px; margin-bottom:6px; }
+  .field.mini input[type=number]{ padding:7px 8px; font-size:13px; }
+  .field.mini input:disabled{ opacity:0.45; }
+  .ref-radio{
+    display:flex; align-items:center; gap:7px;
+    font-family:"IBM Plex Mono",monospace; font-size:11px;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--text-muted);
+    cursor:pointer; padding:7px 10px;
+    border:1px solid var(--border-strong); border-radius:2px;
+    white-space:nowrap;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .ref-radio input{ accent-color:var(--accent); margin:0; }
+  .ref-radio.is-ref{ border-color:var(--accent); color:var(--accent-strong); background:var(--accent-soft); }
+  .shape-diagram{ display:flex; flex-direction:column; gap:14px; }
+  .shape-diagram svg{
+    width:100%; height:auto; display:block;
+    background:var(--bg-raised); border:1px solid var(--border); border-radius:2px;
+  }
+  .shape-total{
+    display:flex; justify-content:space-between;
+    font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--text-faint);
+    padding-top:10px; border-top:1px solid var(--border);
+  }
+  .shape-total .v{ color:var(--text); font-variant-numeric:tabular-nums; }
+
+  /* ---------- Simulation ---------- */
+  .sim-intro{ color:var(--text-muted); max-width:66ch; margin-bottom:36px; }
+  .sim-panel{
+    display:grid; grid-template-columns:0.95fr 1.05fr;
+    gap:0;
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  @media (max-width:860px){ .sim-panel{ grid-template-columns:1fr; } }
+
+  .sim-controls{
+    padding:28px;
+    border-right:1px solid var(--border);
+  }
+  @media (max-width:860px){ .sim-controls{ border-right:none; border-bottom:1px solid var(--border); } }
+  .field{ margin-bottom:20px; }
+  .field label{
+    display:flex; justify-content:space-between;
+    font-family:"IBM Plex Mono",monospace; font-size:12px;
+    letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--text-faint); margin-bottom:8px;
+  }
+  .field label span.val{ color:var(--accent); }
+  .field label .mono{ text-transform:none; }
+  .field input[type=range]{
+    width:100%; accent-color:var(--accent);
+    background:transparent;
+  }
+  .field input[type=number]{
+    width:100%;
+    background:var(--bg-raised);
+    border:1px solid var(--border-strong);
+    color:var(--text);
+    font-family:"IBM Plex Mono",monospace; font-size:14px;
+    padding:9px 10px; border-radius:2px;
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+  .sim-actions{ display:flex; gap:10px; margin-top:8px; }
+  .btn-sm{
+    font-family:"IBM Plex Mono",monospace; font-size:12px;
+    letter-spacing:0.05em; text-transform:uppercase;
+    padding:10px 16px; border-radius:2px; cursor:pointer;
+    border:1px solid var(--border-strong); background:transparent; color:var(--text);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .btn-sm:hover{ border-color:var(--accent); color:var(--accent-strong); }
+  .btn-sm.primary{
+    background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600;
+  }
+  .btn-sm.primary:hover{ background:var(--accent-strong); border-color:var(--accent-strong); color:var(--accent-ink); }
+  .btn-sm:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  .sim-readout{ padding:28px; }
+  .readout-canvas-wrap{
+    display:flex; gap:22px;
+  }
+  @media (max-width:520px){ .readout-canvas-wrap{ flex-direction:column; } }
+  .readout-canvas-wrap canvas{
+    background:var(--bg-raised);
+    border:1px solid var(--border);
+    border-radius:2px;
+    flex:none;
+  }
+  .readout-values{
+    flex:1;
+    display:grid; gap:10px; align-content:start;
+  }
+  .readout-item{
+    display:flex; justify-content:space-between; align-items:baseline;
+    border-bottom:1px solid var(--border);
+    padding-bottom:9px;
+  }
+  .readout-item .k{
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px;
+    color:var(--text-faint); letter-spacing:0.04em;
+  }
+  .readout-item .v{
+    font-family:"IBM Plex Mono",monospace; font-size:16px;
+    color:var(--text); font-variant-numeric:tabular-nums;
+  }
+  .readout-item .v .unit{ color:var(--text-faint); font-size:12px; margin-left:3px; }
+  .readout-item.hl .v{ color:var(--accent); }
+  .status-line{
+    margin-top:16px;
+    font-family:"IBM Plex Mono",monospace; font-size:12px;
+    color:var(--blue);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  }
+  @media (max-width:780px){ .contact-grid{ grid-template-columns:1fr; } }
+  .contact-grid p{ color:var(--text-muted); max-width:50ch; }
+  .contact-card{
+    border:1px solid var(--border); background:var(--surface); border-radius:3px;
+    padding:24px;
+  }
+  .contact-row{
+    display:flex; justify-content:space-between; gap:14px;
+    padding:13px 0; border-bottom:1px solid var(--border);
+    font-family:"IBM Plex Mono",monospace; font-size:13.5px;
+  }
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row .k{ color:var(--text-faint); text-transform:uppercase; letter-spacing:0.06em; }
+  .contact-row .v{ color:var(--text); }
+
+  footer{ padding:32px 0; }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--text-faint);
+    letter-spacing:0.04em;
+  }
+</style>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">TECHNOLOGY<span class="dot">·</span>LAB<small>Hydraulic Automation Engineering</small></a>
+    <ul class="navlinks">
+      <li><a href="#about">회사소개</a></li>
+      <li><a href="#business">사업영역</a></li>
+      <li><a href="#shape">제품형상</a></li>
+      <li><a href="#fillinfo">충진정보</a></li>
+      <li><a href="#powdermove">분말이동</a></li>
+      <li><a href="#simulation">시뮬레이션</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Hydraulic Commissioning &amp; Automation</div>
+        <h1>유압을 <span class="accent">정밀</span>하게<br>제어합니다</h1>
+        <p class="lead">Technology Lab은 유압기기 시운전과 자동화 장치 설계·제작을 전문으로 합니다. 분말야금 프레스의 성형·정형 공정을 위한 제어 프로그램을 직접 개발하고 운영합니다.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#simulation">시뮬레이션 보기</a>
+          <a class="btn btn-ghost" href="#contact">문의하기</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-head">
+          <span>PRESS CYCLE — AMBIENT</span>
+          <span class="live mono" id="hero-state">AUTO</span>
+        </div>
+        <canvas id="hero-canvas" width="420" height="300" role="img" aria-label="유압 프레스 펀치가 상하로 반복 동작하는 개략도 애니메이션"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">01 — 회사소개</span>
+        <h2>Technology Lab</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Technology Lab은 유압기기의 시운전(commissioning)과 자동화 장치의 설계·제작을 수행하는 엔지니어링 기업입니다. 현장에서 유압 시스템을 직접 가동하고 검증해 온 경험을 바탕으로, 생산 설비에 최적화된 자동화 장치와 제어 시스템을 설계합니다.</p>
+          <p>특히 분말야금(powder metallurgy) 프레스 분야에서 성형·정형 공정의 제어 프로그램을 직접 제작하고, 설치 이후의 제어 프로그램 운영까지 함께 담당합니다.</p>
+          <div class="tags">
+            <span class="tag">시운전 COMMISSIONING</span>
+            <span class="tag">자동화 설계 AUTOMATION</span>
+            <span class="tag">제어 프로그램 CONTROL SW</span>
+            <span class="tag">정밀 프레스 제어 PM PRESS</span>
+          </div>
+        </div>
+        <div class="specsheet">
+          <dl>
+            <div class="row"><dt>상호</dt><dd>Technology Lab</dd></div>
+            <div class="row"><dt>업종</dt><dd>유압기기 시운전 / 자동화 설계</dd></div>
+            <div class="row"><dt>주요 공정</dt><dd>분말야금 프레스 제어</dd></div>
+            <div class="row"><dt>대응 범위</dt><dd>설계 · 제작 · 시운전 · 운영</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="business">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">02 — 사업영역</span>
+        <h2>분말야금 프레스 프로그램</h2>
+      </div>
+      <p class="sim-intro">분말야금 프레스의 성형 프레스와 정형 프레스를 위한 프로그램을 제작하고, 설치 이후 제어 프로그램의 운영까지 함께 담당합니다.</p>
+      <div class="press-grid">
+        <article class="press-card">
+          <div class="diagram">
+            <svg viewBox="0 0 320 200" aria-label="성형 프레스 개략도">
+              <line x1="40" y1="20" x2="40" y2="180" stroke="#3a424a" stroke-width="2"/>
+              <line x1="280" y1="20" x2="280" y2="180" stroke="#3a424a" stroke-width="2"/>
+              <rect x="120" y="18" width="80" height="22" fill="none" stroke="#5c93a6" stroke-width="2"/>
+              <rect x="132" y="40" width="56" height="34" fill="#5c93a6" opacity="0.55"/>
+              <rect x="112" y="96" width="96" height="58" fill="none" stroke="#e2812c" stroke-width="2"/>
+              <circle cx="130" cy="112" r="2.4" fill="#e2812c"/>
+              <circle cx="145" cy="120" r="2.4" fill="#e2812c"/>
+              <circle cx="160" cy="108" r="2.4" fill="#e2812c"/>
+              <circle cx="176" cy="122" r="2.4" fill="#e2812c"/>
+              <circle cx="190" cy="112" r="2.4" fill="#e2812c"/>
+              <circle cx="138" cy="134" r="2.4" fill="#e2812c"/>
+              <circle cx="170" cy="138" r="2.4" fill="#e2812c"/>
+              <rect x="132" y="154" width="56" height="20" fill="none" stroke="#5c93a6" stroke-width="2"/>
+              <line x1="40" y1="96" x2="112" y2="96" stroke="#3a424a" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <text x="46" y="92" fill="#69727a" font-size="10" font-family="IBM Plex Mono, monospace">FILL</text>
+              <line x1="280" y1="154" x2="208" y2="154" stroke="#3a424a" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <text x="240" y="170" fill="#69727a" font-size="10" font-family="IBM Plex Mono, monospace">DIE</text>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="kicker">Forming Press</span>
+            <h3>성형 프레스</h3>
+            <p>분말을 금형에 충진하여 1차 형상을 성형하는 공정의 제어 프로그램을 제작합니다. 충진량과 가압 속도를 정밀하게 제어하여 균일한 밀도의 성형체를 구현합니다.</p>
+            <ul>
+              <li>충진량 제어</li>
+              <li>가압 속도 프로파일 제어</li>
+              <li>성형 압력 실시간 모니터링</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="press-card">
+          <div class="diagram">
+            <svg viewBox="0 0 320 200" aria-label="정형 프레스 개략도">
+              <line x1="40" y1="20" x2="40" y2="180" stroke="#3a424a" stroke-width="2"/>
+              <line x1="280" y1="20" x2="280" y2="180" stroke="#3a424a" stroke-width="2"/>
+              <rect x="128" y="18" width="64" height="22" fill="none" stroke="#5c93a6" stroke-width="2"/>
+              <rect x="138" y="40" width="44" height="46" fill="#5c93a6" opacity="0.55"/>
+              <rect x="120" y="96" width="80" height="46" fill="none" stroke="#e2812c" stroke-width="2"/>
+              <rect x="138" y="142" width="44" height="16" fill="none" stroke="#5c93a6" stroke-width="2"/>
+              <line x1="205" y1="96" x2="220" y2="96" stroke="#69727a" stroke-width="1.4"/>
+              <line x1="205" y1="142" x2="220" y2="142" stroke="#69727a" stroke-width="1.4"/>
+              <line x1="220" y1="96" x2="220" y2="142" stroke="#69727a" stroke-width="1.4"/>
+              <polygon points="220,96 216,102 224,102" fill="#69727a"/>
+              <polygon points="220,142 216,136 224,136" fill="#69727a"/>
+              <text x="228" y="122" fill="#69727a" font-size="10" font-family="IBM Plex Mono, monospace">±Δh</text>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="kicker">Sizing Press</span>
+            <h3>정형 프레스</h3>
+            <p>성형된 제품의 치수와 밀도를 최종 규격에 맞추는 정형 공정 프로그램을 제작합니다. 스프링백을 보정하여 최종 치수 정밀도를 확보합니다.</p>
+            <ul>
+              <li>치수 보정 제어</li>
+              <li>스프링백 보정 연산</li>
+              <li>최종 밀도 균일화</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="shape">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">1단계 — 제품 형상</span>
+        <h2>제품 형상 입력</h2>
+      </div>
+      <p class="sim-intro">펀치(LP, Low Punch) 수와 각 펀치의 높이를 입력하고, 기준축으로 지정할 펀치와 기준축으로부터의 단차를 입력하면 그 값 그대로 실제 단면 형상을 도형으로 그려줍니다.</p>
+
+      <div class="sim-panel">
+        <div class="sim-controls">
+          <div class="field">
+            <label for="in-sec-count">펀치 수 <span class="val mono" id="v-sec-count">4</span></label>
+            <input type="range" id="in-sec-count" min="1" max="4" step="1" value="4">
+          </div>
+          <div class="shape-rows" id="shape-rows"></div>
+        </div>
+        <div class="sim-readout">
+          <div class="shape-diagram">
+            <svg id="shape-svg" viewBox="0 0 380 400" role="img" aria-label="펀치별 높이와 기준축, 단차를 반영해 실제 단면 형상을 표시한 개략도"></svg>
+            <div class="shape-total">
+              <span>총 높이 TOTAL HEIGHT</span>
+              <span class="v mono" id="shape-total-height">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="up-section">
+        <h3>상부 펀치 (UP)</h3>
+        <p class="sim-intro" style="margin-bottom:18px;">각 UP이 대응하는 LP를 선택하면, 그 LP의 완제품 형상(단차+높이)에서 상부 단차를 자동으로 계산해 위 도형에 함께 표시합니다.</p>
+        <div class="up-rows" id="up-rows"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fillinfo">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">2단계 — 충진 정보</span>
+        <h2>충진 정보 입력</h2>
+      </div>
+      <p class="sim-intro">위 제품 형상(펀치 수·높이·단차)을 이어받아 각 LP별로 충진값을 입력하면 높이×충진값으로 충진 높이를 계산합니다. 각 펀치의 단차+충진높이 중 가장 큰 값이 다이(DIE) 면이 되고, 모든 펀치는 이 면부터 아래로 충진 공간을 확보합니다. 각 펀치 옆의 값은 그 펀치 자신의 단차로부터 충진 위치까지의 거리입니다.</p>
+
+      <div class="sim-panel">
+        <div class="sim-controls">
+          <div class="shape-rows" id="fill-rows"></div>
+        </div>
+        <div class="sim-readout">
+          <div class="shape-diagram">
+            <svg id="fill-svg" viewBox="0 0 380 400" role="img" aria-label="펀치별 충진값을 반영한 충진 형상 개략도"></svg>
+            <div class="shape-total">
+              <span>다이 충진 높이 DIE FILL HEIGHT</span>
+              <span class="v mono" id="fill-total-height">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="powdermove">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">3단계 — 분말이동</span>
+        <h2>분말이동</h2>
+      </div>
+      <p class="sim-intro">기준펀치로부터 바깥쪽으로 한 칸씩 계산합니다: 각 LP의 중앙(단차+높이/2)에 바로 안쪽 이웃(기준에 더 가까운 LP)의 충진값/높이 비율을 곱하고, 그 LP 자신의 단차를 빼서 분말 중앙을 구하고, 충진높이의 절반을 빼서 위치를 정합니다. 완제품 형상에서 상단 또는 하단(단차)이 같은 LP가 있으면 이 계산 대신 그 면을 그대로 맞추며, 기준펀치에 더 가까운 LP를 기준으로 먼 쪽 LP를 이동시킵니다. 이렇게 구한 값 중 가장 낮은 지점이 기준(0)보다 내려가면, 그 지점이 정확히 기준에 닿도록 전체를 들어올리는 자동 Offset이 적용됩니다. 필요하면 수동 Offset을 추가로 넣어 전체를 더 올릴 수 있습니다.</p>
+
+      <div class="sim-panel">
+        <div class="sim-controls">
+          <div class="readout-item hl" style="margin-bottom:20px;">
+            <span class="k">자동 OFFSET AUTO</span>
+            <span class="v mono" id="auto-offset-val">0.00<span class="unit">mm</span></span>
+          </div>
+          <div class="field">
+            <label for="in-manual-offset">수동 OFFSET <span class="mono">mm</span></label>
+            <input type="number" id="in-manual-offset" min="0" step="0.1" value="0">
+          </div>
+          <div class="shape-rows" id="move-rows"></div>
+        </div>
+        <div class="sim-readout">
+          <div class="shape-diagram">
+            <svg id="move-svg" viewBox="0 0 380 400" role="img" aria-label="분말이동과 자동·수동 Offset을 반영한 충진분말 위치 개략도"></svg>
+            <div class="shape-total">
+              <span>총 OFFSET TOTAL OFFSET</span>
+              <span class="v mono" id="move-total-offset">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="simulation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">06 — 시뮬레이션</span>
+        <h2>시뮬레이션 기능</h2>
+      </div>
+      <p class="sim-intro">완제품의 형상을 입력하면 충진값과 분말 이동에 따른 사전가압·최종가압 위치, 스프링백량을 계산합니다. 제어 속도를 입력하면 그 속도에 맞춰 펀치가 실제로 움직입니다.</p>
+
+      <div class="sim-panel">
+        <div class="sim-controls">
+          <div class="field-row">
+            <div class="field">
+              <label for="in-height">완제품 높이 <span class="val mono" id="v-height">30</span> <span class="mono">mm</span></label>
+              <input type="range" id="in-height" min="10" max="60" step="1" value="30">
+            </div>
+            <div class="field">
+              <label for="in-diam">완제품 지름 <span class="val mono" id="v-diam">20</span> <span class="mono">mm</span></label>
+              <input type="range" id="in-diam" min="8" max="50" step="1" value="20">
+            </div>
+          </div>
+          <div class="field">
+            <label for="in-ratio">압축비 (충진/완제품) <span class="val mono" id="v-ratio">2.30</span></label>
+            <input type="range" id="in-ratio" min="1.8" max="2.8" step="0.05" value="2.3">
+          </div>
+          <div class="field">
+            <label for="in-speed">제어 속도 <span class="val mono" id="v-speed">15</span> <span class="mono">mm/s</span></label>
+            <input type="range" id="in-speed" min="3" max="40" step="1" value="15">
+          </div>
+          <div class="sim-actions">
+            <button class="btn-sm primary" id="btn-run">제어 시작</button>
+            <button class="btn-sm" id="btn-reset">초기화</button>
+          </div>
+        </div>
+
+        <div class="sim-readout">
+          <div class="readout-canvas-wrap">
+            <canvas id="sim-canvas" width="150" height="240" role="img" aria-label="입력값에 따라 펀치가 움직이는 프레스 시뮬레이션"></canvas>
+            <div class="readout-values">
+              <div class="readout-item"><span class="k">충진값 FILL HEIGHT</span><span class="v mono" id="r-fill">—</span></div>
+              <div class="readout-item"><span class="k">사전가압 위치 PRE-PRESS</span><span class="v mono" id="r-pre">—</span></div>
+              <div class="readout-item"><span class="k">최종가압 위치 FINAL PRESS</span><span class="v mono" id="r-final">—</span></div>
+              <div class="readout-item hl"><span class="k">스프링백량 SPRINGBACK</span><span class="v mono" id="r-spring">—</span></div>
+              <div class="readout-item"><span class="k">보정 목표값 COMPENSATED TARGET</span><span class="v mono" id="r-comp">—</span></div>
+              <div class="readout-item"><span class="k">펀치 위치 PUNCH POS</span><span class="v mono" id="r-punch">—</span></div>
+            </div>
+          </div>
+          <div class="status-line mono" id="sim-status">STATE: READY</div>
+        </div>
+      </div>
+
+      <div class="up-section">
+        <h3>상부 램(RAM) 동작 파라미터</h3>
+        <p class="sim-intro" style="margin-bottom:18px;">상부 램의 단계별 위치·속도 파라미터입니다. 속도(mm/s) 항목을 제외한 나머지는 모두 위치값(mm)입니다.</p>
+        <div class="ram-params" id="ram-params">
+          <div class="field mini">
+            <label>고속하강위치 <span class="mono">mm</span></label>
+            <input type="number" id="ram-fast-down-pos" step="0.1" value="150">
+          </div>
+          <div class="field mini">
+            <label>고속하강속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="ram-fast-down-speed" step="0.1" value="200">
+          </div>
+          <div class="field mini">
+            <label>저속하강위치 <span class="mono">mm</span></label>
+            <input type="number" id="ram-slow-down-pos" step="0.1" value="20">
+          </div>
+          <div class="field mini">
+            <label>저속하강속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="ram-slow-down-speed" step="0.1" value="15">
+          </div>
+          <div class="field mini">
+            <label>탑프레싱거리 <span class="mono">mm</span></label>
+            <input type="number" id="ram-top-press-dist" step="0.1" value="5">
+          </div>
+          <div class="field mini">
+            <label>스프링백위치 <span class="mono">mm</span></label>
+            <input type="number" id="ram-springback-pos" step="0.1" value="1.5">
+          </div>
+          <div class="field mini">
+            <label>스프링백속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="ram-springback-speed" step="0.1" value="3">
+          </div>
+          <div class="field mini">
+            <label>저속상승위치 <span class="mono">mm</span></label>
+            <input type="number" id="ram-slow-up-pos" step="0.1" value="20">
+          </div>
+          <div class="field mini">
+            <label>저속상승속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="ram-slow-up-speed" step="0.1" value="15">
+          </div>
+          <div class="field mini">
+            <label>고속상승속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="ram-fast-up-speed" step="0.1" value="200">
+          </div>
+          <div class="field mini">
+            <label>최종가압오프셋 <span class="mono">mm</span></label>
+            <input type="number" id="ram-final-offset" step="0.01" value="0.2">
+          </div>
+        </div>
+      </div>
+
+      <div class="up-section">
+        <h3>다이(DIE) 파라미터</h3>
+        <p class="sim-intro" style="margin-bottom:18px;">속도 항목은 mm/s, 나머지 위치·충진 값은 mm 단위입니다.</p>
+        <div class="ram-params" id="die-params">
+          <div class="field mini">
+            <label>충진방법</label>
+            <select id="die-fill-method">
+              <option value="1">1단충진</option>
+              <option value="2">2단충진</option>
+            </select>
+          </div>
+          <div class="field mini">
+            <label>기본속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="die-base-speed" step="0.1" value="15">
+          </div>
+          <div class="field mini">
+            <label>오버충진 <span class="mono">mm</span></label>
+            <input type="number" id="die-over-fill" step="0.01" value="0.3">
+          </div>
+          <div class="field mini">
+            <label>언더충진 <span class="mono">mm</span></label>
+            <input type="number" id="die-under-fill" step="0.01" value="0.2">
+          </div>
+          <div class="field mini">
+            <label>성형동기위치 <span class="mono">mm</span></label>
+            <input type="number" id="die-form-sync-pos" step="0.1" value="10">
+          </div>
+          <div class="field mini">
+            <label>이젝션동기성분</label>
+            <select id="die-eject-sync-mode">
+              <option value="position">위치동기</option>
+              <option value="time">시간동기</option>
+            </select>
+          </div>
+          <div class="field mini">
+            <label>이젝션동기 STEP <span class="mono">mm</span></label>
+            <input type="number" id="die-eject-sync-step" step="0.1" value="5">
+          </div>
+          <div class="field mini">
+            <label>이젝션위치 <span class="mono">mm</span></label>
+            <input type="number" id="die-eject-pos" step="0.1" value="40">
+          </div>
+          <div class="field mini">
+            <label>이젝션속도 <span class="mono">mm/s</span></label>
+            <input type="number" id="die-eject-speed" step="0.1" value="10">
+          </div>
+          <div class="field mini">
+            <label>이젝션량 <span class="mono">mm</span></label>
+            <input type="number" id="die-eject-amount" step="0.1" value="5">
+          </div>
+          <div class="field mini" style="grid-column:1 / -1;">
+            <label>이젝션 펀치 지정</label>
+            <div class="eject-punch-checks" id="eject-punch-checks"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num mono">07 — 문의</span>
+        <h2>문의하기</h2>
+      </div>
+      <div class="contact-grid">
+        <p>유압기기 시운전, 자동화 장치 설계, 분말야금 프레스 제어 프로그램에 대해 문의하실 내용이 있으면 아래 연락처로 연락 주세요.</p>
+        <div class="contact-card">
+          <div class="contact-row"><span class="k">TEL</span><span class="v">[전화번호 입력]</span></div>
+          <div class="contact-row"><span class="k">EMAIL</span><span class="v">[이메일 주소 입력]</span></div>
+          <div class="contact-row"><span class="k">ADDRESS</span><span class="v">[주소 입력]</span></div>
+          <div class="contact-row"><span class="k">HOURS</span><span class="v">평일 09:00 – 18:00</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Technology Lab. All rights reserved.</span>
+    <span>정밀 유압 자동화 엔지니어링</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setupCanvas(canvas){
+    var ratio = window.devicePixelRatio || 1;
+    var rect = canvas.getBoundingClientRect();
+    var w = rect.width || canvas.width;
+    var h = canvas.width ? (canvas.height / canvas.width) * w : rect.height;
+    canvas.width = Math.round(w * ratio);
+    canvas.height = Math.round(h * ratio);
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(ratio,0,0,ratio,0,0);
+    return { ctx: ctx, w: w, h: h };
+  }
+
+  function drawPress(ctx, w, h, punchT, opts){
+    opts = opts || {};
+    ctx.clearRect(0,0,w,h);
+    var frameL = w*0.18, frameR = w*0.82;
+    var top = h*0.08, bottom = h*0.9;
+    var dieTop = h*0.62, dieBottom = h*0.85;
+    var dieL = w*0.34, dieR = w*0.66;
+
+    ctx.strokeStyle = '#3a424a';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(frameL, top); ctx.lineTo(frameL, bottom);
+    ctx.moveTo(frameR, top); ctx.lineTo(frameR, bottom);
+    ctx.stroke();
+
+    ctx.strokeStyle = '#e2812c';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(dieL, dieTop, dieR-dieL, dieBottom-dieTop);
+
+    if (opts.fillLevel !== undefined){
+      var fillY = dieBottom - (dieBottom-dieTop) * opts.fillLevel;
+      ctx.fillStyle = 'rgba(226,129,44,0.22)';
+      ctx.fillRect(dieL+2, fillY, (dieR-dieL)-4, (dieBottom-fillY)-2);
+    }
+
+    var punchW = (dieR-dieL) - 8;
+    var punchTopY = top + 6;
+    var punchTravel = (dieTop + (dieBottom-dieTop)*0.15) - punchTopY;
+    var punchY = punchTopY + punchTravel * punchT;
+
+    ctx.fillStyle = '#5c93a6';
+    ctx.globalAlpha = 0.85;
+    ctx.fillRect(dieL+4, punchY, punchW, h*0.1);
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = '#5c93a6';
+    ctx.strokeRect(dieL+4, punchY, punchW, h*0.1);
+  }
+
+  /* ---- Hero ambient loop ---- */
+  var heroCanvas = document.getElementById('hero-canvas');
+  var heroState = document.getElementById('hero-state');
+  if (heroCanvas){
+    var hc = setupCanvas(heroCanvas);
+    if (reduceMotion){
+      drawPress(hc.ctx, hc.w, hc.h, 0.5, { fillLevel: 0.6 });
+      heroState.textContent = 'STATIC';
+    } else {
+      var t0 = null;
+      function heroLoop(ts){
+        if (t0 === null) t0 = ts;
+        var elapsed = (ts - t0) / 1600;
+        var phase = elapsed % 1;
+        var punchT = phase < 0.5 ? (phase/0.5) : (1 - (phase-0.5)/0.5);
+        punchT = punchT*punchT*(3-2*punchT);
+        drawPress(hc.ctx, hc.w, hc.h, punchT, { fillLevel: 0.55 + 0.15*(1-punchT) });
+        requestAnimationFrame(heroLoop);
+      }
+      requestAnimationFrame(heroLoop);
+    }
+  }
+
+  /* ---- Product shape logic ---- */
+  var secCountInput = document.getElementById('in-sec-count');
+  var secCountVal = document.getElementById('v-sec-count');
+  var shapeRowsEl = document.getElementById('shape-rows');
+  var shapeSvg = document.getElementById('shape-svg');
+  var shapeTotalEl = document.getElementById('shape-total-height');
+  var fillRowsEl = document.getElementById('fill-rows');
+  var fillSvg = document.getElementById('fill-svg');
+  var fillTotalEl = document.getElementById('fill-total-height');
+  var moveRowsEl = document.getElementById('move-rows');
+  var moveSvg = document.getElementById('move-svg');
+  var moveTotalOffsetEl = document.getElementById('move-total-offset');
+  var autoOffsetValEl = document.getElementById('auto-offset-val');
+  var manualOffsetInput = document.getElementById('in-manual-offset');
+  var upRowsEl = document.getElementById('up-rows');
+
+  var shapeState = {
+    heights: [68, 8, 38, 15],
+    steps: [-18, 17, 0, 23],
+    ref: 2
+  };
+  var fillState = {
+    values: [2.1, 2.3, 2.2, 2.0]
+  };
+  var upState = {
+    corrLP: [0, 1, 2, 3],
+    ref: 0
+  };
+  // temporary: verify 분말이동 against just the first N punches while
+  // 제품형상/충진정보 keep showing all of them
+  var moveLimit = 4;
+  var moveState = {
+    manualOffset: 0
+  };
+
+  function clampCount(n){ return Math.max(1, Math.min(4, n || 1)); }
+
+  function syncShapeArrays(n){
+    while (shapeState.heights.length < n){
+      shapeState.heights.push(20);
+      shapeState.steps.push(0);
+    }
+    shapeState.heights.length = n;
+    shapeState.steps.length = n;
+    if (shapeState.ref >= n) shapeState.ref = n - 1;
+    shapeState.steps[shapeState.ref] = 0;
+  }
+
+  function syncFillArray(n){
+    while (fillState.values.length < n) fillState.values.push(2);
+    fillState.values.length = n;
+  }
+
+  function fmtSigned(n){ return (n >= 0 ? '+' : '') + n.toFixed(2); }
+
+  function shapeRowMarkup(i){
+    var isRef = (i === shapeState.ref);
+    return ''
+      + '<div class="shape-row" data-i="' + i + '">'
+      +   '<div class="shape-row-top">'
+      +     '<span class="shape-row-label mono">LP' + (i + 1) + '</span>'
+      +     '<label class="ref-radio' + (isRef ? ' is-ref' : '') + '">'
+      +       '<input type="radio" name="shape-ref" value="' + i + '"' + (isRef ? ' checked' : '') + '>'
+      +       '<span>기준축</span>'
+      +     '</label>'
+      +   '</div>'
+      +   '<div class="shape-row-fields">'
+      +     '<div class="field mini">'
+      +       '<label>높이 <span class="mono">mm</span></label>'
+      +       '<input type="number" class="shape-height" min="1" max="300" step="0.5" value="' + shapeState.heights[i] + '">'
+      +     '</div>'
+      +     '<div class="field mini">'
+      +       '<label>단차 <span class="mono">mm</span></label>'
+      +       '<input type="number" class="shape-step" step="0.01" value="' + shapeState.steps[i].toFixed(2) + '"' + (isRef ? ' disabled' : '') + '>'
+      +     '</div>'
+      +   '</div>'
+      + '</div>';
+  }
+
+  function renderShapeRows(){
+    shapeRowsEl.innerHTML = shapeState.heights.map(function(_, i){ return shapeRowMarkup(i); }).join('');
+  }
+
+  // Upper punches (UP): same count as LP, each maps to a corresponding LP.
+  // Its 단차 isn't entered — it's the corresponding LP's own absolute top
+  // (단차+높이) in the finished product, re-based so the UP marked as the
+  // upper reference axis reads 0.
+  function syncUpArrays(n){
+    while (upState.corrLP.length < n){ upState.corrLP.push(upState.corrLP.length); }
+    upState.corrLP.length = n;
+    upState.corrLP = upState.corrLP.map(function(v){ return Math.min(v, n - 1); });
+    if (upState.ref >= n) upState.ref = n - 1;
+  }
+
+  function computeUpValues(){
+    syncUpArrays(shapeState.heights.length);
+    var stepBase = computeBaseMM();
+    var topAbs = shapeState.heights.map(function(h, i){ return stepBase[i] + h; });
+    var raw = upState.corrLP.map(function(lpIdx){ return topAbs[lpIdx]; });
+    var refRaw = raw[upState.ref];
+    return raw.map(function(v){ return v - refRaw; });
+  }
+
+  function upRowMarkup(i, values, n){
+    var isRef = (i === upState.ref);
+    var options = '';
+    for (var k = 0; k < n; k++){
+      options += '<option value="' + k + '"' + (upState.corrLP[i] === k ? ' selected' : '') + '>LP' + (k + 1) + '</option>';
+    }
+    return ''
+      + '<div class="shape-row" data-i="' + i + '">'
+      +   '<div class="shape-row-top">'
+      +     '<span class="shape-row-label mono">UP' + (i + 1) + '</span>'
+      +     '<label class="ref-radio' + (isRef ? ' is-ref' : '') + '">'
+      +       '<input type="radio" name="up-ref" value="' + i + '"' + (isRef ? ' checked' : '') + '>'
+      +       '<span>기준축</span>'
+      +     '</label>'
+      +   '</div>'
+      +   '<div class="field mini">'
+      +     '<label>대응 LP</label>'
+      +     '<select class="up-corr" data-i="' + i + '">' + options + '</select>'
+      +   '</div>'
+      +   '<div class="up-computed"><span>단차 (자동)</span><span class="v mono">' + fmtSigned(values[i]) + '</span></div>'
+      + '</div>';
+  }
+
+  function renderUpRows(){
+    if (!upRowsEl) return;
+    var n = shapeState.heights.length;
+    syncUpArrays(n);
+    var values = computeUpValues();
+    upRowsEl.innerHTML = upState.corrLP.map(function(_, i){ return upRowMarkup(i, values, n); }).join('');
+  }
+
+  if (upRowsEl){
+    ['input', 'change'].forEach(function(evt){
+      upRowsEl.addEventListener(evt, function(e){
+        var t = e.target;
+        var row = t.closest ? t.closest('.shape-row') : null;
+        if (!row) return;
+        var i = parseInt(row.getAttribute('data-i'), 10);
+        if (t.classList.contains('up-corr') && evt === 'change'){
+          upState.corrLP[i] = parseInt(t.value, 10);
+          renderUpRows();
+          drawShape();
+        } else if (t.type === 'radio' && evt === 'change'){
+          upState.ref = i;
+          renderUpRows();
+          drawShape();
+        }
+      });
+    });
+  }
+
+  // Generic profile renderer: draws LP columns of given heights sitting at given
+  // base positions (baseMM, mm-space where "up" is positive), autoscaled to fit,
+  // with a fixed datum axis at mm = 0. calloutText/calloutColor give the per-column
+  // dimension label; bottomLabel gives the per-column text under the base line.
+  function drawProfileMM(svgEl, totalEl, heights, baseMM, opts){
+    opts = opts || {};
+    var n = heights.length;
+    var totalMm = heights.reduce(function(a, b){ return a + b; }, 0) || 1;
+
+    var svgW = 380, svgH = 400;
+    var colStart = 54, marginR = 20;
+    var topMargin = 60, bottomMargin = 140;
+
+    var availW = svgW - colStart - marginR;
+    var colW = availW / n;
+
+    var i;
+    var topMM = [];
+    var maxMM = 5, minMM = -5;
+    for (i = 0; i < n; i++){
+      topMM.push(baseMM[i] + heights[i]);
+      maxMM = Math.max(maxMM, baseMM[i] + heights[i]);
+      minMM = Math.min(minMM, baseMM[i]);
+      if (opts.floorMM) minMM = Math.min(minMM, opts.floorMM(i));
+      if (opts.calloutFromMM){
+        var fm = opts.calloutFromMM(i);
+        maxMM = Math.max(maxMM, fm);
+        minMM = Math.min(minMM, fm);
+      }
+    }
+    var axisMM = (opts.axisMM !== undefined) ? opts.axisMM : 0;
+    maxMM = Math.max(maxMM, axisMM);
+    minMM = Math.min(minMM, axisMM);
+
+    var availH = svgH - topMargin - bottomMargin;
+    var scaleV = availH / (maxMM - minMM);
+    function mmToY(mm){ return topMargin + (maxMM - mm) * scaleV; }
+    var refY = mmToY(axisMM);
+
+    var cx = [];
+    var topY = [], baseY = [];
+    for (i = 0; i < n; i++){
+      var x0 = colStart + i * colW;
+      cx.push(x0 + colW / 2);
+      baseY.push(topMargin + (maxMM - baseMM[i]) * scaleV);
+      topY.push(topMargin + (maxMM - topMM[i]) * scaleV);
+    }
+
+    var palette = ['#232830', '#1c1f22'];
+    var parts = [];
+
+    // reference axis (datum) — GD&T style datum feature symbol at the left
+    var axisLabel = opts.axisLabel || 'A';
+    var axisText = opts.axisText || 'REF AXIS';
+    parts.push('<rect x="6" y="' + (refY - 10).toFixed(1) + '" width="20" height="20" fill="#101214" stroke="#5c93a6" stroke-width="1.5"/>');
+    parts.push('<text x="16" y="' + (refY + 4).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5c93a6">' + axisLabel + '</text>');
+    parts.push('<polygon points="42,' + (refY - 6).toFixed(1) + ' 42,' + (refY + 6).toFixed(1) + ' 54,' + refY.toFixed(1) + '" fill="#5c93a6"/>');
+    parts.push('<line x1="30" y1="' + refY.toFixed(1) + '" x2="' + (svgW - marginR) + '" y2="' + refY.toFixed(1) + '" stroke="#5c93a6" stroke-width="2" stroke-dasharray="6 4"/>');
+    parts.push('<text x="' + (svgW - marginR) + '" y="' + (refY - 8).toFixed(1) + '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c93a6">' + axisText + '</text>');
+
+    for (i = 0; i < n; i++){
+      var isHi = (i === opts.highlightIndex);
+      var color = opts.calloutColor ? opts.calloutColor(i) : '#9ba3ab';
+      var x0c = colStart + i * colW;
+
+      if (opts.calloutText && !opts.calloutFromMM){
+        // axis-referenced callout (1단계 style): the punch simply floats at its
+        // 단차 height, nothing drawn filling the space below it
+        if (Math.abs(baseY[i] - refY) > 0.5){
+          parts.push('<line x1="' + cx[i].toFixed(1) + '" y1="' + refY.toFixed(1) + '" x2="' + cx[i].toFixed(1) + '" y2="' + baseY[i].toFixed(1) + '" stroke="' + color + '" stroke-width="1.2" stroke-dasharray="3 3"/>');
+        }
+        parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (baseY[i] + 122).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="' + color + '">' + opts.calloutText(i) + '</text>');
+      }
+
+      // punch body
+      parts.push('<rect x="' + x0c.toFixed(1) + '" y="' + topY[i].toFixed(1) + '" width="' + colW.toFixed(1) + '" height="' + (baseY[i] - topY[i]).toFixed(1) + '" fill="' + palette[i % 2] + '" stroke="' + (isHi ? '#5c93a6' : '#3a424a') + '" stroke-width="' + (isHi ? '2' : '1.5') + '"/>');
+      parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (topY[i] + 16).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#ece9e2">LP' + (i + 1) + '</text>');
+      if (opts.topExtra){
+        var extraLines = opts.topExtra(i) || [];
+        extraLines.forEach(function(line, li){
+          var segBottom = topY[i] - li * 30;
+          var segTop = segBottom - 18;
+          parts.push('<line x1="' + cx[i].toFixed(1) + '" y1="' + segBottom.toFixed(1) + '" x2="' + cx[i].toFixed(1) + '" y2="' + segTop.toFixed(1) + '" stroke="#e2812c" stroke-width="1.2" stroke-dasharray="3 3"/>');
+          // upper-mould foot symbol — mirrors the lower hatch, pointing up
+          parts.push('<line x1="' + (cx[i] - 12).toFixed(1) + '" y1="' + segTop.toFixed(1) + '" x2="' + (cx[i] + 12).toFixed(1) + '" y2="' + segTop.toFixed(1) + '" stroke="#69727a" stroke-width="1.6"/>');
+          for (var uh = 0; uh < 4; uh++){
+            var ux = cx[i] - 12 + uh * 8;
+            parts.push('<line x1="' + ux.toFixed(1) + '" y1="' + segTop.toFixed(1) + '" x2="' + (ux - 4).toFixed(1) + '" y2="' + (segTop - 7).toFixed(1) + '" stroke="#69727a" stroke-width="1.2"/>');
+          }
+          parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (segTop - 12).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#e2812c">' + line + '</text>');
+        });
+      }
+      if (opts.subLabel && (baseY[i] - topY[i]) > 42){
+        parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (topY[i] + 32).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#69727a">' + opts.subLabel(i) + '</text>');
+      }
+
+      // centre marker — the midpoint ("비") this LP is positioned around, with
+      // its height value written right beside it rather than down at the base
+      var centerY = (topY[i] + baseY[i]) / 2;
+      if ((baseY[i] - topY[i]) > 30){
+        parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (centerY + 20).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#9ba3ab">' + heights[i].toFixed(1) + 'mm</text>');
+      }
+      parts.push('<line x1="' + (cx[i] - 9).toFixed(1) + '" y1="' + centerY.toFixed(1) + '" x2="' + (cx[i] + 9).toFixed(1) + '" y2="' + centerY.toFixed(1) + '" stroke="#ece9e2" stroke-width="1.2" stroke-dasharray="2 2"/>');
+      parts.push('<circle cx="' + cx[i].toFixed(1) + '" cy="' + centerY.toFixed(1) + '" r="3" fill="#101214" stroke="#ece9e2" stroke-width="1.4"/>');
+
+      // physical floor limit — this LP must never sit lower than its original 단차 position
+      if (opts.floorMM){
+        var floorY = mmToY(opts.floorMM(i));
+        parts.push('<line x1="' + (x0c - 3).toFixed(1) + '" y1="' + floorY.toFixed(1) + '" x2="' + (x0c + colW + 3).toFixed(1) + '" y2="' + floorY.toFixed(1) + '" stroke="#c9534f" stroke-width="1.6"/>');
+        parts.push('<text x="' + (x0c + colW - 2).toFixed(1) + '" y="' + (floorY - 4).toFixed(1) + '" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#c9534f">LIMIT</text>');
+      }
+
+      // 이동 (space) — the punch floats free above its 단차 base: the gap
+      // between them is left empty (no box, nothing attached), just a thin
+      // dashed reference line down to the foot, at the real unscaled distance
+      var rodTopY = baseY[i];
+      var rodBotY = opts.calloutFromMM ? Math.max(mmToY(opts.calloutFromMM(i)), baseY[i]) : (baseY[i] + 100);
+      if (rodBotY - rodTopY > 0.5){
+        parts.push('<line x1="' + cx[i].toFixed(1) + '" y1="' + rodTopY.toFixed(1) + '" x2="' + cx[i].toFixed(1) + '" y2="' + rodBotY.toFixed(1) + '" stroke="#3a424a" stroke-width="1.2" stroke-dasharray="3 3"/>');
+      }
+      parts.push('<line x1="' + (cx[i] - 12).toFixed(1) + '" y1="' + rodBotY.toFixed(1) + '" x2="' + (cx[i] + 12).toFixed(1) + '" y2="' + rodBotY.toFixed(1) + '" stroke="#69727a" stroke-width="1.6"/>');
+      for (var hIdx = 0; hIdx < 4; hIdx++){
+        var hx = cx[i] - 12 + hIdx * 8;
+        parts.push('<line x1="' + hx.toFixed(1) + '" y1="' + rodBotY.toFixed(1) + '" x2="' + (hx - 4).toFixed(1) + '" y2="' + (rodBotY + 7).toFixed(1) + '" stroke="#69727a" stroke-width="1.2"/>');
+      }
+
+      // 단차/이동 labels sit near the rod; the rod itself never encodes their value
+      if (opts.calloutText && opts.calloutFromMM){
+        if (opts.calloutFromText){
+          parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + (rodBotY + 22).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#5c93a6">' + opts.calloutFromText(i) + '</text>');
+        }
+        parts.push('<text x="' + cx[i].toFixed(1) + '" y="' + ((rodTopY + rodBotY) / 2 + 4).toFixed(1) + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#e2812c">' + opts.calloutText(i) + '</text>');
+      }
+    }
+
+    svgEl.innerHTML = parts.join('');
+    totalEl.textContent = totalMm.toFixed(2) + ' mm';
+  }
+
+  function computeBaseMM(){
+    return shapeState.heights.map(function(_, i){ return (i === shapeState.ref) ? 0 : shapeState.steps[i]; });
+  }
+
+  function drawShape(){
+    var baseMM = computeBaseMM();
+    var upValues = upRowsEl ? computeUpValues() : null;
+    drawProfileMM(shapeSvg, shapeTotalEl, shapeState.heights, baseMM, {
+      highlightIndex: shapeState.ref,
+      calloutText: function(i){ return (i === shapeState.ref) ? '0.00' : fmtSigned(shapeState.steps[i]); },
+      calloutColor: function(i){
+        if (i === shapeState.ref) return '#5c93a6';
+        return shapeState.steps[i] === 0 ? '#9ba3ab' : '#e2812c';
+      },
+      topExtra: function(lpIdx){
+        if (!upValues) return [];
+        var lines = [];
+        upState.corrLP.forEach(function(corr, upIdx){
+          if (corr === lpIdx){
+            lines.push('UP' + (upIdx + 1) + ' ' + fmtSigned(upValues[upIdx]));
+          }
+        });
+        return lines;
+      }
+    });
+  }
+
+  function drawFillShape(){
+    if (!fillSvg) return;
+    // The die opening is one shared, flat surface. Its depth is set by whichever
+    // LP's fill column reaches highest in absolute terms (own 단차 + own fill
+    // height) — that LP sets the die (e.g. LP3: step -2, fill 56 → 54, the max).
+    // Every other LP's fill then starts that same die line and goes down by its
+    // own fill height; the 충진위치 shown is that base measured from the LP's
+    // OWN 단차, not from the die line itself.
+    var stepBase = computeBaseMM();
+    var Hf = shapeState.heights.map(function(h, i){ return h * fillState.values[i]; });
+    var topAbs = Hf.map(function(h, i){ return stepBase[i] + h; });
+    var dieTopMM = Math.max.apply(null, topAbs);
+    var dieIndex = topAbs.indexOf(dieTopMM);
+    var baseMM = Hf.map(function(h){ return dieTopMM - h; });
+
+    drawProfileMM(fillSvg, fillTotalEl, Hf, baseMM, {
+      highlightIndex: dieIndex,
+      axisMM: dieTopMM,
+      axisLabel: 'D',
+      axisText: 'DIE',
+      calloutFromMM: function(i){ return stepBase[i]; },
+      calloutFromText: function(i){ return '단차 ' + fmtSigned(stepBase[i]); },
+      calloutText: function(i){ return '이동 ' + (baseMM[i] - stepBase[i]).toFixed(2); },
+      calloutColor: function(i){ return (i === dieIndex) ? '#5c93a6' : '#e2812c'; },
+      subLabel: function(i){ return shapeState.heights[i].toFixed(1) + '×' + fillState.values[i].toFixed(2); }
+    });
+    fillTotalEl.textContent = dieTopMM.toFixed(2) + ' mm';
+  }
+
+  function fillRowMarkup(i){
+    var fillH = shapeState.heights[i] * fillState.values[i];
+    return ''
+      + '<div class="shape-row" data-i="' + i + '">'
+      +   '<div class="shape-row-top">'
+      +     '<span class="shape-row-label mono">LP' + (i + 1) + '</span>'
+      +     '<span class="fill-inherited mono">H ' + shapeState.heights[i].toFixed(1) + 'mm · 충진 ' + fillH.toFixed(1) + 'mm</span>'
+      +   '</div>'
+      +   '<div class="field mini">'
+      +     '<label>충진값 <span class="mono">×</span></label>'
+      +     '<input type="number" class="fill-value" min="0.1" max="5" step="0.01" value="' + fillState.values[i].toFixed(3) + '">'
+      +   '</div>'
+      + '</div>';
+  }
+
+  function renderFillRows(){
+    if (!fillRowsEl) return;
+    fillRowsEl.innerHTML = shapeState.heights.map(function(_, i){ return fillRowMarkup(i); }).join('');
+  }
+
+  // Powder movement has its own reference punch, separate from the 기준축
+  // punch chosen in step 1: whichever LP has the largest 충진량(Hf) — which
+  // is also the lowest-단차 one, since that's the LP the die depth is set by
+  // — anchors the whole move. Every other LP cascades toward it, always via
+  // whichever already-resolved LP is nearest in 단차:
+  //   productCentre = 단차 + 높이/2                        — this LP's centre
+  //                   in the finished product
+  //   scaledCentre  = productCentre × (이웃의 충진값 / 이웃의 높이) — scaled by
+  //                   the growth factor of the nearest already-resolved LP
+  //   powderCentre  = scaledCentre − 이 LP의 단차            — unscaled 단차 is
+  //                   subtracted back off
+  //   powderBase    = powderCentre − 이 LP의 충진높이/2
+  // e.g. anchor(H68·단차0·충진2.1) — LP(H8·단차35·충진2.3):
+  //   productCentre = 35+4 = 39 → scaledCentre = 39×2.1 = 81.9
+  //   → powderCentre = 81.9−35 = 46.9 → powderBase = 46.9−9.2 = 37.7
+  // If the finished product shape shows two (or more) LPs sharing the same
+  // top or the same bottom (단차), a shared edge in the real product must
+  // stay shared in the powder too, so those LPs ignore the cascade and
+  // instead align flush on that edge, using whichever of them sits closest
+  // to the movement-reference punch as the anchor and moving the farther
+  // one(s) to match it.
+  // Nothing may sit below the shared base (0): whichever LP ends up lowest
+  // after all of this gets the whole assembly lifted so it lands exactly on
+  // that floor, never below it; manual offset adds on top of that.
+  function computeMoveData(){
+    var lim = Math.min(moveLimit, shapeState.heights.length);
+    var H = shapeState.heights.slice(0, lim);
+    var n = H.length;
+    var stepBase = computeBaseMM().slice(0, lim);
+    var topAbs = H.map(function(h, i){ return stepBase[i] + h; });
+    var Hf = H.map(function(h, i){ return h * fillState.values[i]; });
+    var EPS = 0.01;
+
+    var refIdx = 0;
+    for (var mi = 1; mi < n; mi++){ if (Hf[mi] > Hf[refIdx]) refIdx = mi; }
+
+    var rawBase = new Array(n);
+
+    // the movement-reference punch itself doesn't move — it anchors everyone else
+    rawBase[refIdx] = stepBase[refIdx];
+
+    // cascade outward in array order from the reference: LP one position
+    // further away always uses its immediate (already-resolved) neighbour
+    // one step closer to the reference punch as its local scale source
+    var order = [];
+    for (var oi = 0; oi < n; oi++){ if (oi !== refIdx) order.push(oi); }
+    order.sort(function(a, b){ return Math.abs(a - refIdx) - Math.abs(b - refIdx); });
+    order.forEach(function(i){
+      var localRef = (i > refIdx) ? i - 1 : i + 1;
+      var scaleFactor = Hf[localRef] / H[localRef];
+      // measure this LP's centre relative to its local reference's own 단차
+      // (not the global 0), scale by the reference's growth factor, then
+      // anchor that scaled distance onto the reference's OWN resolved
+      // powder position (not its 단차) to get an absolute powder centre
+      var productCentreRelative = (stepBase[i] - stepBase[localRef]) + H[i] / 2;
+      var scaledCentre = productCentreRelative * scaleFactor;
+      var absolutePowderCentre = rawBase[localRef] + scaledCentre;
+      rawBase[i] = absolutePowderCentre - Hf[i] / 2;
+    });
+
+    function closestToRef(indices){
+      var best = indices[0];
+      for (var k = 1; k < indices.length; k++){
+        if (Math.abs(indices[k] - refIdx) < Math.abs(best - refIdx)) best = indices[k];
+      }
+      return best;
+    }
+    function groupsBy(values){
+      var used = {}, groups = [];
+      for (var a = 0; a < n; a++){
+        if (used[a]) continue;
+        var g = [a];
+        for (var b = a + 1; b < n; b++){
+          if (!used[b] && Math.abs(values[b] - values[a]) < EPS){ g.push(b); used[b] = true; }
+        }
+        if (g.length > 1) groups.push(g);
+      }
+      return groups;
+    }
+
+    // shared 단차 (bottom) in the finished product → keep those bases identical
+    groupsBy(stepBase).forEach(function(group){
+      var anchor = closestToRef(group);
+      group.forEach(function(g){ rawBase[g] = rawBase[anchor]; });
+    });
+
+    // shared top in the finished product → keep those tops identical
+    groupsBy(topAbs).forEach(function(group){
+      var anchor = closestToRef(group);
+      group.forEach(function(g){ rawBase[g] = rawBase[anchor] + Hf[anchor] - Hf[g]; });
+    });
+
+    // the movement-reference punch itself is the floor (it's fixed, unscaled,
+    // and was chosen precisely because it's the lowest one) — nothing else
+    // may end up below IT. Only lift if some cascaded LP dipped under the
+    // anchor; the anchor itself never moves from an automatic offset.
+    var lowest = Math.min.apply(null, rawBase);
+    var autoOffset = Math.max(0, rawBase[refIdx] - lowest);
+    var manual = moveState.manualOffset || 0;
+    var baseMM = rawBase.map(function(b){ return b + autoOffset + manual; });
+
+    var dieHeight = stepBase[refIdx] + Hf[refIdx];
+
+    return { n: n, Hf: Hf, stepBase: stepBase, baseMM: baseMM, autoOffset: autoOffset, manual: manual, refIdx: refIdx, dieHeight: dieHeight };
+  }
+
+  function drawMoveShape(){
+    if (!moveSvg) return;
+    var d = computeMoveData();
+    if (autoOffsetValEl) autoOffsetValEl.textContent = d.autoOffset.toFixed(2);
+    if (moveTotalOffsetEl) moveTotalOffsetEl.textContent = (d.autoOffset + d.manual).toFixed(2) + ' mm';
+    drawProfileMM(moveSvg, { textContent: '' }, d.Hf, d.baseMM, {
+      highlightIndex: d.refIdx,
+      axisMM: d.dieHeight + d.autoOffset + d.manual,
+      axisLabel: 'D',
+      axisText: 'DIE ' + d.dieHeight.toFixed(1) + 'mm',
+      calloutFromMM: function(i){ return d.stepBase[i]; },
+      calloutFromText: function(i){ return '단차 ' + fmtSigned(d.stepBase[i]); },
+      calloutText: function(i){ var shift = d.baseMM[i] - d.stepBase[i]; return '이동 ' + fmtSigned(shift); },
+      calloutColor: function(i){ return '#e2812c'; },
+      subLabel: function(i){ return '충진 ' + d.Hf[i].toFixed(1) + 'mm'; },
+      floorMM: function(i){ return d.stepBase[i]; }
+    });
+  }
+
+  function moveRowMarkup(i, d){
+    return ''
+      + '<div class="shape-row" data-i="' + i + '">'
+      +   '<div class="shape-row-top">'
+      +     '<span class="shape-row-label mono">LP' + (i + 1) + '</span>'
+      +     '<span class="fill-inherited mono">충진높이 ' + d.Hf[i].toFixed(1) + 'mm</span>'
+      +   '</div>'
+      +   '<div class="fill-inherited mono">최종 하단 ' + d.baseMM[i].toFixed(2) + 'mm · 원래 단차 대비 ' + fmtSigned(d.baseMM[i] - d.stepBase[i]) + 'mm</div>'
+      + '</div>';
+  }
+
+  function renderMoveRows(){
+    if (!moveRowsEl) return;
+    var d = computeMoveData();
+    var lim = Math.min(moveLimit, shapeState.heights.length);
+    moveRowsEl.innerHTML = shapeState.heights.slice(0, lim).map(function(_, i){ return moveRowMarkup(i, d); }).join('');
+  }
+
+  if (manualOffsetInput){
+    manualOffsetInput.addEventListener('input', function(){
+      var v = parseFloat(manualOffsetInput.value);
+      if (isNaN(v) || v < 0) v = 0;
+      moveState.manualOffset = v;
+      renderMoveRows();
+      drawMoveShape();
+    });
+  }
+
+  if (secCountInput){
+    secCountInput.addEventListener('input', function(){
+      var n = clampCount(parseInt(secCountInput.value, 10));
+      secCountVal.textContent = n;
+      syncShapeArrays(n);
+      syncFillArray(n);
+      renderShapeRows();
+      renderFillRows();
+      drawShape();
+      drawFillShape();
+      renderMoveRows();
+      drawMoveShape();
+      renderUpRows();
+      renderEjectPunchChecks();
+    });
+
+    ['input', 'change'].forEach(function(evt){
+      shapeRowsEl.addEventListener(evt, function(e){
+        var t = e.target;
+        var row = t.closest ? t.closest('.shape-row') : null;
+        if (!row) return;
+        var i = parseInt(row.getAttribute('data-i'), 10);
+
+        if (t.classList.contains('shape-height')){
+          var v = parseFloat(t.value);
+          if (!isNaN(v) && v > 0) shapeState.heights[i] = v;
+          drawShape();
+          renderFillRows();
+          drawFillShape();
+          renderMoveRows();
+          drawMoveShape();
+          renderUpRows();
+        } else if (t.classList.contains('shape-step')){
+          var v2 = parseFloat(t.value);
+          if (!isNaN(v2)) shapeState.steps[i] = v2;
+          drawShape();
+          renderFillRows();
+          drawFillShape();
+          renderMoveRows();
+          drawMoveShape();
+          renderUpRows();
+        } else if (t.type === 'radio' && evt === 'change'){
+          shapeState.ref = i;
+          shapeState.steps[i] = 0;
+          renderShapeRows();
+          drawShape();
+          renderFillRows();
+          drawFillShape();
+          renderMoveRows();
+          drawMoveShape();
+          renderUpRows();
+        }
+      });
+    });
+
+    if (fillRowsEl){
+      ['input', 'change'].forEach(function(evt){
+        fillRowsEl.addEventListener(evt, function(e){
+          var t = e.target;
+          if (!t.classList.contains('fill-value')) return;
+          var row = t.closest ? t.closest('.shape-row') : null;
+          if (!row) return;
+          var i = parseInt(row.getAttribute('data-i'), 10);
+          var vf = parseFloat(t.value);
+          if (!isNaN(vf) && vf > 0) fillState.values[i] = vf;
+          drawFillShape();
+          renderMoveRows();
+          drawMoveShape();
+        });
+      });
+    }
+
+    secCountVal.textContent = shapeState.heights.length;
+    secCountInput.value = shapeState.heights.length;
+    syncFillArray(shapeState.heights.length);
+    renderShapeRows();
+    renderFillRows();
+    drawShape();
+    drawFillShape();
+    renderMoveRows();
+    drawMoveShape();
+    renderUpRows();
+  }
+
+  /* ---- Upper ram (RAM) motion parameters ---- */
+  var ramFieldIds = {
+    fastDownPos: 'ram-fast-down-pos',
+    fastDownSpeed: 'ram-fast-down-speed',
+    slowDownPos: 'ram-slow-down-pos',
+    slowDownSpeed: 'ram-slow-down-speed',
+    topPressDist: 'ram-top-press-dist',
+    springbackPos: 'ram-springback-pos',
+    springbackSpeed: 'ram-springback-speed',
+    slowUpPos: 'ram-slow-up-pos',
+    slowUpSpeed: 'ram-slow-up-speed',
+    fastUpSpeed: 'ram-fast-up-speed',
+    finalOffset: 'ram-final-offset'
+  };
+  var ramInputs = {};
+  var ramState = {};
+  Object.keys(ramFieldIds).forEach(function(key){
+    var el = document.getElementById(ramFieldIds[key]);
+    ramInputs[key] = el;
+    if (el) ramState[key] = parseFloat(el.value);
+  });
+  var ramParamsEl = document.getElementById('ram-params');
+  if (ramParamsEl){
+    ramParamsEl.addEventListener('input', function(e){
+      var t = e.target;
+      var key = Object.keys(ramInputs).find(function(k){ return ramInputs[k] === t; });
+      if (!key) return;
+      var v = parseFloat(t.value);
+      ramState[key] = isNaN(v) ? 0 : v;
+    });
+  }
+
+  /* ---- Die parameters ---- */
+  var dieFieldIds = {
+    fillMethod: 'die-fill-method',
+    baseSpeed: 'die-base-speed',
+    overFill: 'die-over-fill',
+    underFill: 'die-under-fill',
+    formSyncPos: 'die-form-sync-pos',
+    ejectSyncMode: 'die-eject-sync-mode',
+    ejectSyncStep: 'die-eject-sync-step',
+    ejectPos: 'die-eject-pos',
+    ejectSpeed: 'die-eject-speed'
+  };
+  var dieInputs = {};
+  var dieState = {};
+  var dieNumericKeys = { baseSpeed: 1, overFill: 1, underFill: 1, formSyncPos: 1, ejectSyncStep: 1, ejectPos: 1, ejectSpeed: 1 };
+  Object.keys(dieFieldIds).forEach(function(key){
+    var el = document.getElementById(dieFieldIds[key]);
+    dieInputs[key] = el;
+    if (el) dieState[key] = dieNumericKeys[key] ? parseFloat(el.value) : el.value;
+  });
+  dieState.ejectPunches = [];
+  var ejectChecksEl = document.getElementById('eject-punch-checks');
+
+  function syncEjectPunches(n){
+    while (dieState.ejectPunches.length < n){ dieState.ejectPunches.push(true); }
+    dieState.ejectPunches.length = n;
+  }
+
+  function renderEjectPunchChecks(){
+    if (!ejectChecksEl) return;
+    var n = shapeState.heights.length;
+    syncEjectPunches(n);
+    var html = '';
+    for (var i = 0; i < n; i++){
+      var on = dieState.ejectPunches[i];
+      html += '<label class="eject-check' + (on ? ' is-on' : '') + '">'
+        + '<input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') + '>'
+        + '<span>LP' + (i + 1) + '</span>'
+        + '</label>';
+    }
+    ejectChecksEl.innerHTML = html;
+  }
+
+  if (ejectChecksEl){
+    ejectChecksEl.addEventListener('change', function(e){
+      var t = e.target;
+      if (t.tagName !== 'INPUT') return;
+      var i = parseInt(t.getAttribute('data-i'), 10);
+      dieState.ejectPunches[i] = t.checked;
+      renderEjectPunchChecks();
+    });
+  }
+
+  var dieParamsEl = document.getElementById('die-params');
+  if (dieParamsEl){
+    ['input', 'change'].forEach(function(evt){
+      dieParamsEl.addEventListener(evt, function(e){
+        var t = e.target;
+        var key = Object.keys(dieInputs).find(function(k){ return dieInputs[k] === t; });
+        if (!key) return;
+        if (dieNumericKeys[key]){
+          var v = parseFloat(t.value);
+          dieState[key] = isNaN(v) ? 0 : v;
+        } else {
+          dieState[key] = t.value;
+        }
+      });
+    });
+  }
+
+  renderEjectPunchChecks();
+
+  /* ---- Simulation logic ---- */
+  var inHeight = document.getElementById('in-height');
+  var inDiam = document.getElementById('in-diam');
+  var inRatio = document.getElementById('in-ratio');
+  var inSpeed = document.getElementById('in-speed');
+  var vHeight = document.getElementById('v-height');
+  var vDiam = document.getElementById('v-diam');
+  var vRatio = document.getElementById('v-ratio');
+  var vSpeed = document.getElementById('v-speed');
+  var rFill = document.getElementById('r-fill');
+  var rPre = document.getElementById('r-pre');
+  var rFinal = document.getElementById('r-final');
+  var rSpring = document.getElementById('r-spring');
+  var rComp = document.getElementById('r-comp');
+  var rPunch = document.getElementById('r-punch');
+  var statusLine = document.getElementById('sim-status');
+  var btnRun = document.getElementById('btn-run');
+  var btnReset = document.getElementById('btn-reset');
+  var simCanvas = document.getElementById('sim-canvas');
+  var sc = simCanvas ? setupCanvas(simCanvas) : null;
+
+  var values = {};
+  var running = false;
+  var animId = null;
+
+  function fmt(n){ return n.toFixed(2); }
+
+  function compute(){
+    var H = parseFloat(inHeight.value);
+    var D = parseFloat(inDiam.value);
+    var R = parseFloat(inRatio.value);
+    var speed = parseFloat(inSpeed.value);
+
+    var fillHeight = H * R;
+    var prePress = H + (fillHeight - H) * 0.4;
+    var finalPress = H;
+    var springback = H * (0.004 + R*0.002);
+    var compTarget = H - springback;
+
+    values = { H:H, D:D, R:R, speed:speed, fillHeight:fillHeight, prePress:prePress, finalPress:finalPress, springback:springback, compTarget:compTarget };
+
+    vHeight.textContent = H.toFixed(0);
+    vDiam.textContent = D.toFixed(0);
+    vRatio.textContent = R.toFixed(2);
+    vSpeed.textContent = speed.toFixed(0);
+
+    rFill.innerHTML = fmt(fillHeight) + '<span class="unit">mm</span>';
+    rPre.innerHTML = fmt(prePress) + '<span class="unit">mm</span>';
+    rFinal.innerHTML = fmt(finalPress) + '<span class="unit">mm</span>';
+    rSpring.innerHTML = fmt(springback) + '<span class="unit">mm</span>';
+    rComp.innerHTML = fmt(compTarget) + '<span class="unit">mm</span>';
+
+    if (!running && sc){
+      drawSim(0.62, values.H);
+    }
+  }
+
+  function drawSim(fillLevel, punchPosMm){
+    if (!sc) return;
+    var t = 1 - Math.min(1, punchPosMm / values.fillHeight);
+    drawPress(sc.ctx, sc.w, sc.h, Math.max(0, Math.min(1, 1-t*1.15)), { fillLevel: fillLevel });
+  }
+
+  function runCycle(){
+    if (running) return;
+    running = true;
+    btnRun.disabled = true;
+    statusLine.textContent = 'STATE: RUNNING — 하강';
+    rPunch.innerHTML = fmt(0) + '<span class="unit">mm</span>';
+
+    var travel = values.fillHeight - values.compTarget;
+    var duration = (travel / values.speed) * 1000;
+    var start = null;
+    var phase = 'down';
+
+    function step(ts){
+      if (start === null) start = ts;
+      var elapsed = ts - start;
+      var frac = Math.min(1, elapsed / duration);
+
+      var pos;
+      if (phase === 'down'){
+        pos = values.fillHeight - travel * frac;
+        drawSim(0.6 - 0.35*frac, pos);
+        if (frac >= 1){
+          phase = 'pause';
+          start = ts;
+          statusLine.textContent = 'STATE: HOLD — 최종가압';
+        }
+      } else if (phase === 'pause'){
+        pos = values.compTarget;
+        if (elapsed > 260){
+          phase = 'up';
+          start = ts;
+          statusLine.textContent = 'STATE: RUNNING — 스프링백/이젝션';
+        }
+      } else if (phase === 'up'){
+        var upTravel = values.finalPress - values.compTarget;
+        var upDur = Math.max(200, (upTravel / values.speed) * 1000);
+        var ufrac = Math.min(1, elapsed / upDur);
+        pos = values.compTarget + upTravel * ufrac;
+        drawSim(0.25 + 0.05*ufrac, pos);
+        if (ufrac >= 1){
+          rPunch.innerHTML = fmt(values.finalPress) + '<span class="unit">mm</span>';
+          statusLine.textContent = 'STATE: DONE — 이젝션 완료';
+          running = false;
+          btnRun.disabled = false;
+          return;
+        }
+      }
+
+      rPunch.innerHTML = fmt(pos) + '<span class="unit">mm</span>';
+      animId = requestAnimationFrame(step);
+    }
+    animId = requestAnimationFrame(step);
+  }
+
+  [inHeight, inDiam, inRatio, inSpeed].forEach(function(el){
+    el.addEventListener('input', function(){
+      if (!running) compute();
+    });
+  });
+
+  btnRun.addEventListener('click', function(){
+    if (reduceMotion){
+      compute();
+      rPunch.innerHTML = fmt(values.compTarget) + '<span class="unit">mm</span>';
+      statusLine.textContent = 'STATE: DONE (reduced motion)';
+      return;
+    }
+    runCycle();
+  });
+
+  btnReset.addEventListener('click', function(){
+    if (animId) cancelAnimationFrame(animId);
+    running = false;
+    btnRun.disabled = false;
+    statusLine.textContent = 'STATE: READY';
+    rPunch.innerHTML = '—';
+    compute();
+  });
+
+  window.addEventListener('resize', function(){
+    if (heroCanvas) hc = setupCanvas(heroCanvas);
+    if (simCanvas){ sc = setupCanvas(simCanvas); if (!running) drawSim(0.62, values.H); }
+  });
+
+  compute();
+})();
+</script>
